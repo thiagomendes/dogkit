@@ -19,6 +19,7 @@ public class UsuarioDao implements IUsuarioDao {
 	private JdbcTemplate jdbcTemplate;
 
 	private static final String GET_USUARIOS = "SELECT * FROM tb_usuario";
+	private static final String POST_USUARIO = "INSERT INTO tb_usuario (nome_completo, email, telefone, sexo, data_criacao) VALUES (?, ?, ?, ?, ?)";
 
 	@Override
 	public List<UsuarioBean> getUsuarios() {
@@ -61,8 +62,8 @@ public class UsuarioDao implements IUsuarioDao {
 
 	@Override
 	public void postUsuario(UsuarioBean usuarioBean) {
-		// TODO Auto-generated method stub
-
+		jdbcTemplate.update(POST_USUARIO, new Object[] { usuarioBean.getNomeCompleto(), usuarioBean.getEmail(),
+				usuarioBean.getTelefone(), usuarioBean.getSexo(), new Date() });
 	}
 
 	public JdbcTemplate getJdbcTemplate() {
