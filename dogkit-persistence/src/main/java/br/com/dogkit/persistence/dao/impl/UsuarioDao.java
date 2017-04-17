@@ -1,5 +1,7 @@
 package br.com.dogkit.persistence.dao.impl;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -7,6 +9,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import br.com.dogkit.common.bean.UsuarioBean;
@@ -19,6 +22,7 @@ public class UsuarioDao implements IUsuarioDao {
 	private JdbcTemplate jdbcTemplate;
 
 	private static final String GET_USUARIOS = "SELECT * FROM tb_usuario";
+	private static final String GET_USUARIO = "SELECT * FROM tb_usuario WHERE id = ?";
 	private static final String POST_USUARIO = "INSERT INTO tb_usuario (nome_completo, email, telefone, sexo, data_criacao) VALUES (?, ?, ?, ?, ?)";
 
 	@Override
@@ -43,9 +47,36 @@ public class UsuarioDao implements IUsuarioDao {
 	}
 
 	@Override
-	public UsuarioBean getUsuario(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public UsuarioBean getUsuario(Long id) {
+
+		UsuarioBean usuarioBean = null;
+
+		try {
+
+			usuarioBean = jdbcTemplate.queryForObject(GET_USUARIO, new Object[] { id },
+
+					new RowMapper<UsuarioBean>() {
+
+						@Override
+						public UsuarioBean mapRow(ResultSet rs, int rowNum) throws SQLException {
+							UsuarioBean bean = new UsuarioBean();
+							bean.setId(rs.getLong("id"));
+							bean.setNomeCompleto(rs.getString("nome_completo"));
+							bean.setEmail(rs.getString("email"));
+							bean.setTelefone(rs.getString("telefone"));
+							bean.setSexo(rs.getString("sexo"));
+							bean.setDataCriacao(rs.getTimestamp("data_criacao"));
+							bean.setDataModificacao(rs.getTimestamp("data_modificacao"));
+							return bean;
+						}
+
+					});
+
+		} catch (Exception e) {
+			System.out.println("Usuário não encontrado!");
+		}
+
+		return usuarioBean;
 	}
 
 	@Override

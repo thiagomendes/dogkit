@@ -8,7 +8,7 @@ public interface IUsuarioDao {
 
 	public List<UsuarioBean> getUsuarios();
 
-	public UsuarioBean getUsuario(Integer id);
+	public UsuarioBean getUsuario(Long id);
 
 	public void putUsuario(UsuarioBean usuarioBean);
 
