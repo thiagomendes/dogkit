@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -72,7 +73,7 @@ public class UsuarioDao implements IUsuarioDao {
 
 					});
 
-		} catch (Exception e) {
+		} catch (EmptyResultDataAccessException e) {
 			System.out.println("Usuário não encontrado!");
 		}
 
