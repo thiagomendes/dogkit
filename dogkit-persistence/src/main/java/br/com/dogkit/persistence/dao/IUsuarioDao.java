@@ -10,10 +10,10 @@ public interface IUsuarioDao {
 
 	public UsuarioBean getUsuario(Long id);
 
-	public void putUsuario(UsuarioBean usuarioBean);
+	public Integer putUsuario(UsuarioBean usuarioBean);
 
-	public void deleteUsuario(UsuarioBean usuarioBean);
+	public Integer deleteUsuario(UsuarioBean usuarioBean);
 
-	public void postUsuario(UsuarioBean usuarioBean);
+	public Integer postUsuario(UsuarioBean usuarioBean);
 
 }

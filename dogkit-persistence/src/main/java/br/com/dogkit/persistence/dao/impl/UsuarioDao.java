@@ -25,6 +25,8 @@ public class UsuarioDao implements IUsuarioDao {
 	private static final String GET_USUARIOS = "SELECT * FROM tb_usuario";
 	private static final String GET_USUARIO = "SELECT * FROM tb_usuario WHERE id = ?";
 	private static final String POST_USUARIO = "INSERT INTO tb_usuario (nome_completo, email, telefone, sexo, data_criacao) VALUES (?, ?, ?, ?, ?)";
+	private static final String DELETE_USUARIO = "DELETE FROM tb_usuario WHERE id = ?";
+	private static final String PUT_USUARIO = "UPDATE tb_usuario SET nome_completo = ?, email = ?, telefone = ?, sexo = ?, data_modificacao = ? WHERE id = ?";
 
 	@Override
 	public List<UsuarioBean> getUsuarios() {
@@ -81,20 +83,19 @@ public class UsuarioDao implements IUsuarioDao {
 	}
 
 	@Override
-	public void putUsuario(UsuarioBean usuarioBean) {
-		// TODO Auto-generated method stub
-
+	public Integer putUsuario(UsuarioBean usuarioBean) {
+		return jdbcTemplate.update(PUT_USUARIO, new Object[] { usuarioBean.getNomeCompleto(), usuarioBean.getEmail(),
+				usuarioBean.getTelefone(), usuarioBean.getSexo(), new Date(), usuarioBean.getId() });
 	}
 
 	@Override
-	public void deleteUsuario(UsuarioBean usuarioBean) {
-		// TODO Auto-generated method stub
-
+	public Integer deleteUsuario(UsuarioBean usuarioBean) {
+		return jdbcTemplate.update(DELETE_USUARIO, new Object[] { usuarioBean.getId() });
 	}
 
 	@Override
-	public void postUsuario(UsuarioBean usuarioBean) {
-		jdbcTemplate.update(POST_USUARIO, new Object[] { usuarioBean.getNomeCompleto(), usuarioBean.getEmail(),
+	public Integer postUsuario(UsuarioBean usuarioBean) {
+		return jdbcTemplate.update(POST_USUARIO, new Object[] { usuarioBean.getNomeCompleto(), usuarioBean.getEmail(),
 				usuarioBean.getTelefone(), usuarioBean.getSexo(), new Date() });
 	}
 
