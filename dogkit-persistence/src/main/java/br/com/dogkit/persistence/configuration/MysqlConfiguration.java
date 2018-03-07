@@ -5,10 +5,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@PropertySource("file:/aplic/dogkit/configuration/mysql_configuration.properties")
+//@PropertySource("file:/aplic/dogkit/configuration/mysql_configuration.properties")
 public class MysqlConfiguration {
 
-	@Value("${url}")
+	/*@Value("${url}")
 	private String url;
 
 	@Value("${usuario}")
@@ -50,5 +50,5 @@ public class MysqlConfiguration {
 
 	public void setDriver(String driver) {
 		this.driver = driver;
-	}
+	}*/
 }

@@ -14,10 +14,10 @@ public class DataSourceConfiguration {
 	public BasicDataSource getDataSource() {
 		MysqlConfiguration mysqlConfiguration = getMysqlConfiguration();
 		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setDriverClassName(mysqlConfiguration.getDriver());
+		/*dataSource.setDriverClassName(mysqlConfiguration.getDriver());
 		dataSource.setUrl(mysqlConfiguration.getUrl());
 		dataSource.setUsername(mysqlConfiguration.getUsuario());
-		dataSource.setPassword(mysqlConfiguration.getSenha());
+		dataSource.setPassword(mysqlConfiguration.getSenha());*/
 		return dataSource;
 	}
 
